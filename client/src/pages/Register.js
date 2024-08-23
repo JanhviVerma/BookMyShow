@@ -3,27 +3,28 @@ import { Form, Input, Button, Radio, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { RegisterUser } from "../calls/users";
 
-
 function Register() {
   const onFinish = async (values) => {
     console.log(values);
-   
-    try{
+    try {
       const response = await RegisterUser(values);
-      if(response.success){
+      if (response.success) {
         message.success(response.message);
-      }
-      else{
+      } else {
         message.error(response.message);
       }
-
-    }
-    catch(error){
+    } catch (error) {
       message.error(error.message);
     }
   };
 
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <>
