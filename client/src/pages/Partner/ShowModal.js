@@ -302,7 +302,93 @@ import {
                   </Col>
                 </Row>
               </Col>
-              
+              <Col span={24}>
+                <Row
+                  gutter={{
+                    xs: 6,
+                    sm: 10,
+                    md: 12,
+                    lg: 16,
+                  }}
+                >
+                  <Col span={8}>
+                    <Form.Item
+                      label="Select the Movie"
+                      htmlFor="movie"
+                      name="movie"
+                      className="d-block"
+                      rules={[{ required: true, message: "Movie  is required!" }]}
+                    >
+                      <Select
+                        id="movie"
+                        placeholder="Select Movie"
+                        defaultValue={selectedMovie && selectedMovie.title}
+                        style={{ width: "100%", height: "45px" }}
+                        options={movies.map((movie) => ({
+                          key: movie._id,
+                          value: movie._id,
+                          label: movie.title,
+                        }))}
+                      />
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item
+                      label="Ticket Price"
+                      htmlFor="ticketPrice"
+                      name="ticketPrice"
+                      className="d-block"
+                      rules={[
+                        { required: true, message: "Ticket price is required!" },
+                      ]}
+                    >
+                      <Input
+                        id="ticketPrice"
+                        type="number"
+                        placeholder="Enter the ticket price"
+                      ></Input>
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item
+                      label="Total Seats"
+                      htmlFor="totalSeats"
+                      name="totalSeats"
+                      className="d-block"
+                      rules={[
+                        { required: true, message: "Total seats are required!" },
+                      ]}
+                    >
+                      <Input
+                        id="totalSeats"
+                        type="number"
+                        placeholder="Enter the number of total seats"
+                      ></Input>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Col>
+            </Row>
+            <div className="d-flex gap-10">
+              <Button
+                className=""
+                block
+                onClick={() => {
+                  setView("table");
+                }}
+                htmlType="button"
+              >
+                <ArrowLeftOutlined /> Go Back
+              </Button>
+              <Button
+                block
+                type="primary"
+                htmlType="submit"
+                style={{ fontSize: "1rem", fontWeight: "600" }}
+              >
+                {view === "form" ? "Add the Show" : "Edit the Show"}
+              </Button>
+            </div>
           </Form>
         )}
       </Modal>
