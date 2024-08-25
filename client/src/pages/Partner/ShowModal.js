@@ -195,5 +195,117 @@ import {
       },
     ];
   
-  }
+    useEffect(() => {
+      getData();
+    }, []);
+  
+    return (
+      <Modal
+        centered
+        title={selectedTheatre.name}
+        open={isShowModalOpen}
+        onCancel={handleCancel}
+        width={1200}
+        footer={null}
+      >
+        <div className="d-flex justify-content-between">
+          <h3>
+            {view === "table"
+              ? "List of Shows"
+              : view === "form"
+              ? "Add Show"
+              : "Edit Show"}
+          </h3>
+          {view === "table" && (
+            <Button type="primary" onClick={() => setView("form")}>
+              Add Show
+            </Button>
+          )}
+        </div>
+        {view === "table" && <Table dataSource={shows} columns={columns} />}
+  
+        {(view === "form" || view === "edit") && (
+          <Form
+            className=""
+            layout="vertical"
+            style={{ width: "100%" }}
+            initialValues={view === "edit" ? selectedShow : null}
+            onFinish={onFinish}
+          >
+            <Row
+              gutter={{
+                xs: 6,
+                sm: 10,
+                md: 12,
+                lg: 16,
+              }}
+            >
+              <Col span={24}>
+                <Row
+                  gutter={{
+                    xs: 6,
+                    sm: 10,
+                    md: 12,
+                    lg: 16,
+                  }}
+                >
+                  <Col span={8}>
+                    <Form.Item
+                      label="Show Name"
+                      htmlFor="name"
+                      name="name"
+                      className="d-block"
+                      rules={[
+                        { required: true, message: "Show name is required!" },
+                      ]}
+                    >
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="Enter the show name"
+                      ></Input>
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item
+                      label="Show Date"
+                      htmlFor="date"
+                      name="date"
+                      className="d-block"
+                      rules={[
+                        { required: true, message: "Show date is required!" },
+                      ]}
+                    >
+                      <Input
+                        id="date"
+                        type="date"
+                        placeholder="Enter the show date"
+                      ></Input>
+                    </Form.Item>
+                  </Col>
+                  <Col span={8}>
+                    <Form.Item
+                      label="Show Timing"
+                      htmlFor="time"
+                      name="time"
+                      className="d-block"
+                      rules={[
+                        { required: true, message: "Show time is required!" },
+                      ]}
+                    >
+                      <Input
+                        id="time"
+                        type="time"
+                        placeholder="Enter the show date"
+                      ></Input>
+                    </Form.Item>
+                  </Col>
+                </Row>
+              </Col>
+              
+          </Form>
+        )}
+      </Modal>
+    );
+  };
   export default ShowModal;
