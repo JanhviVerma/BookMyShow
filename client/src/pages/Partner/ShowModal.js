@@ -98,4 +98,102 @@ import {
       setIsShowModalOpen(false);
     };
   
-    export ShowModal;
+    const handleDelete = async (showId) => {
+      try {
+        dispatch(showLoading());
+        const response = await deleteShow({ showId: showId });
+        if (response.success) {
+          message.success(response.message);
+          getData();
+        } else {
+          message.error(response.message);
+        }
+        dispatch(hideLoading());
+      } catch (err) {
+        message.error(err.message);
+        dispatch(hideLoading());
+      }
+    };
+    const columns = [
+      {
+        title: "Show Name",
+        dataIndex: "name",
+        key: "name",
+      },
+      {
+        title: "Show Date",
+        dataIndex: "date",
+        render: (text, data) => {
+          return moment(text).format("MMM Do YYYY");
+        },
+      },
+      {
+        title: "Show Time",
+        dataIndex: "time",
+        render: (text, data) => {
+          return moment(text, "HH:mm").format("hh:mm A");
+        },
+      },
+      {
+        title: "Movie",
+        dataIndex: "movie",
+        render: (text, data) => {
+          return data.movie.title;
+        },
+      },
+      {
+        title: "Ticket Price",
+        dataIndex: "ticketPrice",
+        key: "ticketPrice",
+      },
+      {
+        title: "Total Seats",
+        dataIndex: "totalSeats",
+        key: "totalSeats",
+      },
+      {
+        title: "Available Seats",
+        dataIndex: "seats",
+        render: (text, data) => {
+          return data.totalSeats - data.bookedSeats.length;
+        },
+      },
+      {
+        title: "Action",
+        dataIndex: "action",
+        render: (text, data) => {
+          return (
+            <div className="d-flex align-items-center gap-10">
+              <Button
+                onClick={() => {
+                  setView("edit");
+                  setSelectedMovie(data.movie);
+                  setSelectedShow({
+                    ...data,
+                    date: moment(data.date).format("YYYY-MM-DD"),
+                  });
+                  console.log(selectedMovie && selectedMovie.title);
+                }}
+              >
+                <EditOutlined />
+              </Button>
+              <Button onClick={() => handleDelete(data._id)}>
+                <DeleteOutlined />
+              </Button>
+              {data.isActive && (
+                <Button
+                  onClick={() => {
+                    setIsShowModalOpen(true);
+                  }}
+                >
+                  + Shows
+                </Button>
+              )}
+            </div>
+          );
+        },
+      },
+    ];
+  
+  }
+  export default ShowModal;
