@@ -2,6 +2,13 @@
 
 This is a clone of the BookMyShow application, a platform for booking movie tickets, events, and other entertainment services. This project demonstrates a full-stack web application using modern web technologies.
 
+![Screenshot from 2024-08-29 18-11-14](https://github.com/user-attachments/assets/d4d71ad8-8f38-49b6-98d1-3c84c1a82fd9)
+![Screenshot from 2024-08-29 18-12-02](https://github.com/user-attachments/assets/8032722c-5d64-44bf-aa04-0b3115fbb49a)
+![Screenshot from 2024-08-29 18-15-40](https://github.com/user-attachments/assets/0e4d87c3-72dc-4bf4-b54c-9b62ee3fe700)
+![Screenshot from 2024-08-29 18-15-47](https://github.com/user-attachments/assets/5db94be6-5773-4924-a579-421af74605d7)
+
+
+
 ## Table of Contents
 
 - [Features](#features)
